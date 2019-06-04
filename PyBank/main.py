@@ -15,7 +15,7 @@ with open(csvpath, newline='', encoding= 'utf-8') as csvfile:
     csv_header = next(csvreader) # reads the 0 row 
     
     print(f"{csv_header}")
-
+    
    # for row in csvreader:
     iteration = 0
     count = 0 
@@ -56,22 +56,24 @@ with open(csvpath, newline='', encoding= 'utf-8') as csvfile:
         if month == month:
             count = count + 1
     
-    avgChange = totalChange / (count-1) 
+    avgChange = round(totalChange / (count-1) ,2)
 
 
-    print(f"Total Months: {count}")  
+    print("Financial Analysis")
+    print("----------------------------")
+    print(f"Total Months: {count}")
     print(f"Total: ${total}")
-    print (f"Average Change: ${avgChange}")
+    print(f"Average Change: ${avgChange}")
     print(f"Greatest Increase {dateMax} (${maxC})")
-    print(f"Greatest Decrease {dateMin} (${minC})")
+    print( f"Greatest Decrease {dateMin} (${minC})")
     
 
 
 
-save = (f"Total Months: {count} Total: ${total} Average Change: ${avgChange} Greatest Increase {dateMax} (${maxC}) Greatest Decrease {dateMin} (${minC})")
+save = (f"Financial Analysis\n---------------------\nTotal Months: {count}\nTotal: ${total}\nAverage Change: ${avgChange}\nGreatest Increase {dateMax} (${maxC})\nGreatest Decrease {dateMin} (${minC})")
     
 
-fileName = input("What do you want your file to be called?") + ".txt"
+fileName = input("What do you want your file to be called? ") + ".txt"
 
 files = open(fileName, 'w')
 files.write(save)
