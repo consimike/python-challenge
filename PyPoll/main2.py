@@ -14,7 +14,7 @@ with open(csvpath, newline='', encoding= 'utf-8') as csvfile:
     # Read the header row first (skip this step if there is no header)
     csv_header = next(csvreader) # reads the 0 row 
     
-    print(f"{csv_header}")
+    #print(f"{csv_header}")
     prevVote = 0
     total_votes = 0
     count = 0
@@ -45,19 +45,42 @@ with open(csvpath, newline='', encoding= 'utf-8') as csvfile:
         if cand_name == "O'Tooley":
             OTool = OTool + 1
         
-    percentK = round((Khan / total_votes) *100,3)
+    percentK = round(((Khan / total_votes) *100),4)
     percentC = round((Correy / total_votes)*100,3)
     percentL = round((Li/total_votes)*100,3)
     percentO = round((OTool/total_votes)*100,3)
 
-    winner = max(percentC,percentK,percentL,percentO)
+    win_percent = max(percentC,percentK,percentL,percentO)
+    if win_percent == percentC:
+            winner = "Correy"
+    elif win_percent == percentK:
+            winner = "Khan"
+    elif win_percent == percentL:
+            winner = "Li"
+    else:
+            winner = "O'Tooley"
+            
+
+
 
     print("Election Results")
+    print("-----------------------")
     print (f"Total votes: {total_votes}")
-    print(f"Candidates {candidate}")
-    print (f"{percentK}% {Khan}")
-    print(f"{percentC}% {Correy}")
-    print(f"{percentL}% {Li}")
-    print (f"{percentO}% {OTool}")
+    print("-----------------------")
+    print(f"{candidate[0]}: {percentK}% ({Khan})")
+    print(f"{candidate[1]}: {percentC}% ({Correy})")
+    print(f"{candidate[2]}: {percentL}% ({Li})")
+    print(f"{candidate[3]}: {percentO}% ({OTool})")
+    print("-----------------------")
     print(f"Winner: {winner}")
-    
+
+
+save =  (f"Election Results \n ----------------------- \n Total votes: {total_votes} \n -----------------------\n {candidate[0]}: {percentK}% ({Khan}) \n {candidate[1]}: {percentC}% ({Correy}) \n {candidate[2]}: {percentL}% ({Li}) \n {candidate[3]}: {percentO}% ({OTool})\n ----------------------- \n Winner: {winner}")
+
+fileName = input("What do you want your file to be called? ") + ".txt"
+
+files = open(fileName, 'w')
+files.write(save)
+files.close()
+os.startfile(fileName)
+
